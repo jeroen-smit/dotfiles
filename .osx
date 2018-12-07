@@ -82,33 +82,33 @@ sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set v
 # SSD-specific tweaks                                                         #
 ###############################################################################
 
-if [[ "$RUN_AS_ROOT" = true ]]; then
-  # Disable local Time Machine snapshots
-  sudo tmutil disablelocal
-
-  # Disable hibernation (speeds up entering sleep mode)
-  sudo pmset -a hibernatemode 0
-
-  # Remove the sleep image file to save disk space
-  sudo rm /Private/var/vm/sleepimage
-  # Create a zero-byte file instead...
-  sudo touch /Private/var/vm/sleepimage
-  # ...and make sure it can’t be rewritten
-  sudo chflags uchg /Private/var/vm/sleepimage
-
-  # Disable the sudden motion sensor as it’s not useful for SSDs
-  sudo pmset -a sms 0
-fi
+# if [[ "$RUN_AS_ROOT" = true ]]; then
+#   # Disable local Time Machine snapshots
+#   sudo tmutil disablelocal
+#
+#   # Disable hibernation (speeds up entering sleep mode)
+#   sudo pmset -a hibernatemode 0
+#
+#   # Remove the sleep image file to save disk space
+#   sudo rm /Private/var/vm/sleepimage
+#   # Create a zero-byte file instead...
+#   sudo touch /Private/var/vm/sleepimage
+#   # ...and make sure it can’t be rewritten
+#   sudo chflags uchg /Private/var/vm/sleepimage
+#
+#   # Disable the sudden motion sensor as it’s not useful for SSDs
+#   sudo pmset -a sms 0
+# fi
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
 # Trackpad: map bottom right corner to right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+#defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+#defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
 # Increase sound quality for Bluetooth headphones/headsets
 # defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -272,13 +272,14 @@ defaults write com.apple.dock expose-animation-duration -float 0.15
 # defaults write com.apple.dock autohide-time-modifier -float 0
 
 # Automatically hide and show the Dock
-# defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
 
 # Enable the 'reduce transparency' option on Yosemite. Save GPU cycles.
-defaults write com.apple.universalaccess reduceTransparency -bool true
+# defaults write com.apple.universalaccess reduceTransparency -bool true
+defaults write com.apple.universalaccess reduceTransparency -bool false
 
 # Add iOS Simulator to Applications folder.
 if [[ "$RUN_AS_ROOT" = true ]]; then
@@ -298,14 +299,14 @@ fi
 # 11: Launchpad
 # 12: Notification Center
 # Bottom right screen corner → Mission Control
-defaults write com.apple.dock wvous-br-corner -int 2
-defaults write com.apple.dock wvous-br-modifier -int 0
+#defaults write com.apple.dock wvous-br-corner -int 2
+#defaults write com.apple.dock wvous-br-modifier -int 0
 # Top right screen corner → Put display to sleep
-defaults write com.apple.dock wvous-tr-corner -int 10
-defaults write com.apple.dock wvous-tr-modifier -int 0
+#defaults write com.apple.dock wvous-tr-corner -int 10
+#defaults write com.apple.dock wvous-tr-modifier -int 0
 # Bottom left screen corner → Desktop
-defaults write com.apple.dock wvous-bl-corner -int 4
-defaults write com.apple.dock wvous-bl-modifier -int 0
+#defaults write com.apple.dock wvous-bl-corner -int 4
+#defaults write com.apple.dock wvous-bl-modifier -int 0
 
 ###############################################################################
 # Safari & WebKit                                                             #
