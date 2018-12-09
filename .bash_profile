@@ -1,7 +1,7 @@
 #
 # .bash_profile
 #
-# @author Jeff Geerling
+# @author Jeff Geerling, modified by Jeroen Smit
 # @see .inputrc
 #
 
@@ -73,9 +73,6 @@ fi
 if [ -x "$(command -v kubectl)" ]; then
   source <(kubectl completion bash)
 fi
-
-# Use brew-installed PHP binaries.
-export PATH="$brew_prefix/opt/php70/bin:$PATH"
 
 # Use nvm.
 # export NVM_DIR="$HOME/.nvm"
@@ -152,4 +149,5 @@ function blt() {
 }
 export PATH="/usr/local/opt/php@7.1/bin:$PATH"
 export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="/usr/local/bin/rbenv/bin:$PATH"
+#export PATH="$HOME/.rbenv/bin:$PATH"
