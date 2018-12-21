@@ -30,7 +30,11 @@ fi
 # Set standby delay to 24 hours (default is 1 hour)
 # You can check current values with `pmset -g`.
 if [[ "$RUN_AS_ROOT" = true ]]; then
-  sudo pmset -a standbydelay 86400
+  # JS update 2018-12-21, fix for appnap waking in the night, not having the filevault key, and causing a crash/reboot
+  sudo pmset -a powernap 0
+  sudo pmset -a standby 0
+  sudo pmset -a standbydelay 0
+  sudo pmset -a autopoweroff 0
 fi
 
 # Disable system sleep (helpful if you're usually plugged into mains power).
@@ -76,7 +80,7 @@ defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Set background to dark-grey color
-sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '/Library/Desktop Pictures/Solid Colors/Solid Gray Dark.png'"
+# sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set value = '/Library/Desktop Pictures/Solid Colors/Solid Gray Dark.png'"
 
 ###############################################################################
 # SSD-specific tweaks                                                         #
@@ -115,7 +119,7 @@ sqlite3 ~/Library/Application\ Support/Dock/desktoppicture.db "update data set v
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs - 0 = text boxes and lists, 2/3 = all controls)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 0
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
@@ -169,7 +173,7 @@ defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Desk
 
 # Show icons for hard drives, servers, and removable media on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
@@ -183,7 +187,7 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 
 # Finder: show path bar
-# defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowPathbar -bool true
 
 # Finder: allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
@@ -223,7 +227,7 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 
 # Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `Nlsv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Disable the warning before emptying the Trash
 # defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -279,7 +283,6 @@ defaults write com.apple.dock showhidden -bool true
 
 # Enable the 'reduce transparency' option on Yosemite. Save GPU cycles.
 # defaults write com.apple.universalaccess reduceTransparency -bool true
-defaults write com.apple.universalaccess reduceTransparency -bool false
 
 # Add iOS Simulator to Applications folder.
 if [[ "$RUN_AS_ROOT" = true ]]; then
