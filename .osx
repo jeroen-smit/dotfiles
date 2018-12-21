@@ -42,6 +42,9 @@ if [[ "$RUN_AS_ROOT" = true ]]; then
   sudo pmset -a sleep 0
 fi
 
+# Don't start iTunes when connecting an iOS device
+defaults write com.apple.iTunesHelper ignore-devices 1
+
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
