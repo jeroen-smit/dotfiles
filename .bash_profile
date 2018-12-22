@@ -74,6 +74,10 @@ if [ -x "$(command -v kubectl)" ]; then
   source <(kubectl completion bash)
 fi
 
+# Use brew-installed PHP binaries.
+export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+
 # Use nvm.
 # export NVM_DIR="$HOME/.nvm"
 # . "$brew_prefix/opt/nvm/nvm.sh"
@@ -148,7 +152,4 @@ trap prod_command_trap DEBUG
 #   fi
 # }
 
-export PATH="/usr/local/opt/php@7.1/bin:$PATH"
-export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
 export PATH="/usr/local/bin/rbenv/bin:$PATH"
-#export PATH="$HOME/.rbenv/bin:$PATH"
