@@ -88,9 +88,9 @@ export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 
 # Super useful Docker container oneshots.
 # Usage: dockrun, or dockrun [centos7|fedora27|debian9|debian8|ubuntu1404|etc.]
-dockrun() {
-  docker run -it geerlingguy/docker-"${1:-ubuntu1604}"-ansible /bin/bash
-}
+# dockrun() {
+#   docker run -it geerlingguy/docker-"${1:-ubuntu1604}"-ansible /bin/bash
+# }
 
 # Enter a running Docker container.
 function denter() {
@@ -133,20 +133,21 @@ prod_command_trap () {
 shopt -s extdebug
 trap prod_command_trap DEBUG
 
-function blt() {
-  if [ "`git rev-parse --show-cdup 2> /dev/null`" != "" ]; then
-    GIT_ROOT=$(git rev-parse --show-cdup)
-  else
-    GIT_ROOT="."
-  fi
+# function blt() {
+#   if [ "`git rev-parse --show-cdup 2> /dev/null`" != "" ]; then
+#     GIT_ROOT=$(git rev-parse --show-cdup)
+#   else
+#     GIT_ROOT="."
+#   fi
+#
+#   if [ -f "$GIT_ROOT/vendor/bin/blt" ]; then
+#      $GIT_ROOT/vendor/bin/blt "$@"
+#    else
+#     echo "You must run this command from within a BLT-generated project repository."
+#     return 1
+#   fi
+# }
 
-  if [ -f "$GIT_ROOT/vendor/bin/blt" ]; then
-    $GIT_ROOT/vendor/bin/blt "$@"
-  else
-    echo "You must run this command from within a BLT-generated project repository."
-    return 1
-  fi
-}
 export PATH="/usr/local/opt/php@7.1/bin:$PATH"
 export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
 export PATH="/usr/local/bin/rbenv/bin:$PATH"
