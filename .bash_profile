@@ -153,3 +153,4 @@ trap prod_command_trap DEBUG
 # }
 
 export PATH="/usr/local/bin/rbenv/bin:$PATH"
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/ #required for gem mysql2 to install correctly, see https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
