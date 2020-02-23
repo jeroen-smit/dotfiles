@@ -31,6 +31,7 @@ fi
 # You can check current values with `pmset -g`.
 if [[ "$RUN_AS_ROOT" = true ]]; then
   # JS update 2018-12-21, fix for appnap waking in the night, not having the filevault key, and causing a crash/reboot
+  # see https://nedap.facebook.com/groups/133469523729084/permalink/461447060931327/
   sudo pmset -a powernap 0
   sudo pmset -a standby 0
   sudo pmset -a standbydelay 0
