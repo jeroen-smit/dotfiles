@@ -79,8 +79,8 @@ export PATH="/usr/local/opt/php@7.2/bin:$PATH"
 export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 
 # Use nvm.
-# export NVM_DIR="$HOME/.nvm"
-# . "$brew_prefix/opt/nvm/nvm.sh"
+export NVM_DIR="$HOME/.nvm"
+. "$brew_prefix/opt/nvm/nvm.sh"
 
 # Use rbenv.
 if [ -f /usr/local/bin/rbenv ]; then
@@ -121,21 +121,21 @@ knownrm() {
 }
 
 # Ask for confirmation when 'prod' is in a command string.
-prod_command_trap () {
-  if [[ $BASH_COMMAND == *prod* ]]
-  then
-    read -p "Are you sure you want to run this command on prod [Y/n]? " -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-      echo -e "\nRunning command \"$BASH_COMMAND\" \n"
-    else
-      echo -e "\nCommand was not run.\n"
-      return 1
-    fi
-  fi
-}
-shopt -s extdebug
-trap prod_command_trap DEBUG
+# prod_command_trap () {
+#   if [[ $BASH_COMMAND == *prod* ]]
+#   then
+#     read -p "Are you sure you want to run this command on prod [Y/n]? " -n 1 -r
+#     if [[ $REPLY =~ ^[Yy]$ ]]
+#     then
+#       echo -e "\nRunning command \"$BASH_COMMAND\" \n"
+#     else
+#       echo -e "\nCommand was not run.\n"
+#       return 1
+#     fi
+#   fi
+# }
+# shopt -s extdebug
+# trap prod_command_trap DEBUG
 
 # function blt() {
 #   if [ "`git rev-parse --show-cdup 2> /dev/null`" != "" ]; then
@@ -154,3 +154,8 @@ trap prod_command_trap DEBUG
 
 export PATH="/usr/local/bin/rbenv/bin:$PATH"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/ #required for gem mysql2 to install correctly, see https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home
+#export ANDROID_HOME=/usr/local/share/android-sdk
+#export ANDROID_SDK_ROOT=/usr/local/share/android-sdk
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
