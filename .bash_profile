@@ -70,13 +70,13 @@ if [ -f $brew_prefix/etc/bash_completion ]; then
 fi
 
 # Turn on kubectl autocomplete.
-if [ -x "$(command -v kubectl)" ]; then
-  source <(kubectl completion bash)
-fi
+# if [ -x "$(command -v kubectl)" ]; then
+#   source <(kubectl completion bash)
+# fi
 
 # Use brew-installed PHP binaries.
-export PATH="/usr/local/opt/php@7.2/bin:$PATH"
-export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
+# export PATH="/usr/local/opt/php@7.2/bin:$PATH"
+# export PATH="/usr/local/opt/php@7.2/sbin:$PATH"
 
 # Use nvm.
 export NVM_DIR="$HOME/.nvm"
@@ -121,42 +121,42 @@ knownrm() {
 }
 
 # Ask for confirmation when 'prod' is in a command string.
-prod_command_trap () {
-  if [[ $BASH_COMMAND == *prod* ]]
-  then
-    read -p "Are you sure you want to run this command on prod [Y/n]? " -n 1 -r
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-      echo -e "\nRunning command \"$BASH_COMMAND\" \n"
-    else
-      echo -e "\nCommand was not run.\n"
-      return 1
-    fi
-  fi
-}
-shopt -s extdebug
-trap prod_command_trap DEBUG
-
-function blt() {
-  if [[ ! -z ${AH_SITE_ENVIRONMENT} ]]; then
-    PROJECT_ROOT="/var/www/html/${AH_SITE_GROUP}.${AH_SITE_ENVIRONMENT}"
-  elif [ "`git rev-parse --show-cdup 2> /dev/null`" != "" ]; then
-    PROJECT_ROOT=$(git rev-parse --show-cdup)
-  else
-    PROJECT_ROOT="."
-  fi
-
-  if [ -f "$PROJECT_ROOT/vendor/bin/blt" ]; then
-    $PROJECT_ROOT/vendor/bin/blt "$@"
-
-  # Check for local BLT.
-  elif [ -f "./vendor/bin/blt" ]; then
-    ./vendor/bin/blt "$@"
-
-  else
-    echo "You must run this command from within a BLT-generated project."
-    return 1
-  fi
-}
+# prod_command_trap () {
+#   if [[ $BASH_COMMAND == *prod* ]]
+#   then
+#     read -p "Are you sure you want to run this command on prod [Y/n]? " -n 1 -r
+#     if [[ $REPLY =~ ^[Yy]$ ]]
+#     then
+#       echo -e "\nRunning command \"$BASH_COMMAND\" \n"
+#     else
+#       echo -e "\nCommand was not run.\n"
+#       return 1
+#     fi
+#   fi
+# }
+# shopt -s extdebug
+# trap prod_command_trap DEBUG
+#
+# function blt() {
+#   if [[ ! -z ${AH_SITE_ENVIRONMENT} ]]; then
+#     PROJECT_ROOT="/var/www/html/${AH_SITE_GROUP}.${AH_SITE_ENVIRONMENT}"
+#   elif [ "`git rev-parse --show-cdup 2> /dev/null`" != "" ]; then
+#     PROJECT_ROOT=$(git rev-parse --show-cdup)
+#   else
+#     PROJECT_ROOT="."
+#   fi
+#
+#   if [ -f "$PROJECT_ROOT/vendor/bin/blt" ]; then
+#     $PROJECT_ROOT/vendor/bin/blt "$@"
+#
+#   # Check for local BLT.
+#   elif [ -f "./vendor/bin/blt" ]; then
+#     ./vendor/bin/blt "$@"
+#
+#   else
+#     echo "You must run this command from within a BLT-generated project."
+#     return 1
+#   fi
+# }
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
